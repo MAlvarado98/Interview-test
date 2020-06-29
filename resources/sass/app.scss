@@ -6,3 +6,13 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//Fixing top margin
+#app{
+    margin-top: 100px;
+}
+
+//Components Styles
+@import './componentStyles/ArticlesComponentStyle';
+@import './componentStyles/BarComponentStyle';
+@import './componentStyles/LoginComponentStyle';
