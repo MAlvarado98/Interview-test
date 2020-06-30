@@ -10951,3 +10951,40 @@ a.text-dark:focus {
   width: 200px;
 }
 
+#AdminComponent .admin-component-button {
+  position: relative;
+  width: 100%;
+  display: block;
+  background: #2b2b29;
+  padding: 20px;
+  border-radius: 20px;
+  transition: background-color 0.5s ease;
+}
+
+#AdminComponent .admin-component-button:hover {
+  text-decoration: none;
+  background: #3b3b39;
+}
+
+#AdminComponent .admin-component-button h2 {
+  font-weight: bold;
+  color: #cdff2e !important;
+  text-decoration: none !important;
+}
+
+#AdminComponent .admin-component-button img {
+  width: 100%;
+}
+
+#ProductComponent .product-image {
+  width: 100%;
+  height: 450px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #858585;
+}
+
+#ProductComponent .product-price {
+  color: #333333;
+}
+

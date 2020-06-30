@@ -19,6 +19,18 @@ Route::get('/', function () {
 
 //Auth::routes();
 
-Route::any('{slug}', function (){
+Route::any('/{slug}', function (){
+    return view('spa');
+});
+
+Route::any('/admin/{slug}', function (){
+    return view('spa');
+});
+
+Route::any('/products/{slug}', function (){
+    return view('spa');
+});
+
+Route::any('/product/{slug}', function (){
     return view('spa');
 });

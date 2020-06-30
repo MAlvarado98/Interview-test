@@ -3,7 +3,7 @@
         <h1>Men's best sellers</h1>
         <div class="row">
             <div class="col-md-3">
-                <a class="card-link" href="#">
+                <a class="card-link" href="/product/1">
                     <div class="card">
                         <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1585661930-41kfVzaBInL.jpg" class="card-img-top" alt="...">
                         <div class="card-body">

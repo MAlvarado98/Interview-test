@@ -1,0 +1,24 @@
+#AdminComponent .admin-component-button{
+    position: relative;
+    width: 100%;
+    display: block;
+    background: rgb(43, 43, 41);
+    padding: 20px;
+    border-radius: 20px;
+    transition: background-color .5s ease;
+}
+
+#AdminComponent .admin-component-button:hover{
+    text-decoration: none;
+    background: rgb(59, 59, 57);
+}
+
+#AdminComponent .admin-component-button h2{
+    font-weight: bold;
+    color: rgb(205, 255, 46)!important;
+    text-decoration: none!important;
+}
+
+#AdminComponent .admin-component-button img{
+    width: 100%;
+}
