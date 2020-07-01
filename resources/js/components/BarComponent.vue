@@ -26,25 +26,32 @@
                     </div>
                 </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <div class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto">
+                        <li v-if="currentUser.name" class="nav-item">
+                            <a class="nav-link disabled" href="#">Hi {{ currentUser.name.split(" ")[0] }}!</a>
+                        </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/cart"><i class="fas fa-shopping-cart"></i> My Cart</router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/login"> <i class="fas fa-sign-in-alt"></i> Login <span class="sr-only"></span></router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/register"> <i class="fas fa-user-plus"></i> Register</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/admin"> <i class="fas fa-cog"></i> Admin <span class="sr-only"></span></router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/logout"> <i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only"></span></router-link>
-                        </li>
+                        <template v-if="currentUser.name">
+                            <li v-if="currentUser.role == 2" class="nav-item">
+                                <router-link class="nav-link" to="/admin"> <i class="fas fa-cog"></i> Admin <span class="sr-only"></span></router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" @click="signOut"> <i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only"></span></a>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/login"> <i class="fas fa-sign-in-alt"></i> Login <span class="sr-only"></span></router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/register"> <i class="fas fa-user-plus"></i> Register</router-link>
+                            </li>
+                        </template>
                     </ul>
-                </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -52,8 +59,23 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        methods: {
+            signOut(){
+                this.$store.dispatch('currentUser/logoutUser');
+            }
+        },
+        computed: {
+            currentUser: {
+                get() {
+                    return this.$store.state.currentUser.user;
+                }
+            }
+        },
+        created(){
+            if( localStorage.hasOwnProperty("workoutshop_token")){
+                axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("workoutshop_token");
+                this.$store.dispatch('currentUser/getUser');
+            }
         }
     }
 </script>

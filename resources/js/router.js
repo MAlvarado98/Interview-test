@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-import home from './components/HomeComponent';
+import index from './components/IndexComponent';
 import products from './components/ProductsComponent';
 import cart from './components/CartComponent';
 import login from './components/LoginComponent';
@@ -17,8 +17,8 @@ import product from './components/ProductComponent';
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: home
+        name: 'index',
+        component: index
     },
     {
         path: '/products/:category',

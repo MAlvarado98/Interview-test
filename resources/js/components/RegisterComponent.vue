@@ -40,8 +40,10 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        beforeCreate(){
+            if( localStorage.hasOwnProperty("workoutshop_token")){
+                window.location.replace("/");
+            }
         }
     }
 </script>

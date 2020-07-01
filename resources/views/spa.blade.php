@@ -22,8 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <bar-component></bar-component>
-        <router-view></router-view>
+        <home-component></home-component>
     </div>
 </body>
 </html>

@@ -52,8 +52,16 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        async created(){
+            
+        },
+        data(){
+            return {
+                
+            }
+        },
+        methods: {
+            
         }
     }
 </script>
