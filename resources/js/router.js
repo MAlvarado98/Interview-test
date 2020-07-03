@@ -3,7 +3,6 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-import index from './components/IndexComponent';
 import products from './components/ProductsComponent';
 import cart from './components/CartComponent';
 import login from './components/LoginComponent';
@@ -13,12 +12,18 @@ import adminPanel from './components/AdminPanelComponent';
 import adminProducts from './components/AdminProductsComponent';
 import adminUsers from './components/AdminUsersComponent';
 import product from './components/ProductComponent';
+import editCurrentUser from './components/EditCurrentUserComponent';
 
 const routes = [
     {
         path: '/',
         name: 'index',
-        component: index
+        component: products
+    },
+    {
+        path: '/editUser',
+        name: 'editCurrentUser',
+        component: editCurrentUser
     },
     {
         path: '/products/:category',
@@ -26,7 +31,7 @@ const routes = [
         component: products
     },
     {
-        path: '/product/:id',
+        path: '/products/:id/:slug',
         name: 'product',
         component: product
     },

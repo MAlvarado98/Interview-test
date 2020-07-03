@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 text-center">
-                <div class="form-signin">
+                <form @submit.prevent="login" class="form-signin">
                     <img class="mb-4 login-icon" src="/img/logo.png">
                     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                     <label for="inputEmail" class="sr-only">Email address</label>
@@ -15,8 +15,11 @@
                         <input type="checkbox" value="remember-me"> Remember me
                         </label>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" @click="login" type="submit">Sign in</button>
-                </div>
+                    <div v-if="message">
+                        Hola perras
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
             </div>
             <div class="col-md-4"></div>
         </div>
@@ -24,6 +27,8 @@
 </template>
 
 <script>
+    import { mapState, mapMutations } from 'vuex';
+
     export default {
         data: () => ({
             user: {
@@ -31,15 +36,24 @@
                 password: ""
             }
         }),
+        computed:{
+            ...mapState('currentUser',[
+                'message'
+            ])
+        },
         methods: {
+            ...mapMutations('currentUser',[
+                'LOGIN_USER'
+            ]),
             login(){
-                this.$store.dispatch('currentUser/loginUser', this.user);
+                this.LOGIN_USER(this.user);
+                this.$router.push("/");
             }
         },
         beforeCreate(){
             if( localStorage.hasOwnProperty("workoutshop_token")){
-                window.location.replace("/");
+                this.$router.push("/");
             }
         }
-    }
+    }   
 </script>

@@ -7,15 +7,6 @@
 
 <script>
     export default {
-        computed:{
-            currentUser: {
-                get() {
-                    return this.$store.state.currentUser.user;
-                }
-            }
-        },
-        created() {
-            
-        }
+        
     }
 </script>

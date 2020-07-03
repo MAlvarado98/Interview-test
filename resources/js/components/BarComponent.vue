@@ -19,27 +19,31 @@
                     Product Type
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <router-link class="dropdown-item" to="/products/clothes"> <i class="fas fa-tshirt"></i> Clothes</router-link>
-                    <router-link class="dropdown-item" to="/products/suplements"> <i class="fas fa-drumstick-bite"></i> Suplements</router-link>
-                    <router-link class="dropdown-item" to="/products/gym-equipement"> <i class="fas fa-dumbbell"></i> GYM Equipment</router-link>
-                    <router-link class="dropdown-item" to="/products/accesories"> <i class="fas fa-mitten"></i> Accesories</router-link>
+                        <router-link class="dropdown-item" to="/products/suplements"> <i class="fas fa-drumstick-bite"></i> Suplements</router-link>
+                        <router-link class="dropdown-item" to="/products/gym-equipement"> <i class="fas fa-dumbbell"></i> GYM Equipment</router-link>
+                        <router-link class="dropdown-item" to="/products/accesories"> <i class="fas fa-mitten"></i> Accesories</router-link>
                     </div>
                 </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto">
-                        <li v-if="currentUser.name" class="nav-item">
-                            <a class="nav-link disabled" href="#">Hi {{ currentUser.name.split(" ")[0] }}!</a>
+                        <li v-if="user.name" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hi {{ user.name.split(" ")[0] }}!
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="userDropDown">
+                                <router-link class="dropdown-item" to="/editUser"> <i class="fas fa-edit"></i> Edit my account</router-link>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/cart"><i class="fas fa-shopping-cart"></i> My Cart</router-link>
                         </li>
-                        <template v-if="currentUser.name">
-                            <li v-if="currentUser.role == 2" class="nav-item">
+                        <template v-if="user.name">
+                            <li v-if="user.role == 2" class="nav-item">
                                 <router-link class="nav-link" to="/admin"> <i class="fas fa-cog"></i> Admin <span class="sr-only"></span></router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" @click="signOut"> <i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only"></span></a>
+                                <a class="nav-link" href="#" @click="logoutUser"> <i class="fas fa-sign-out-alt"></i> Logout <span class="sr-only"></span></a>
                             </li>
                         </template>
                         <template v-else>
@@ -58,23 +62,31 @@
 </template>
 
 <script>
+    import { mapState, mapMutations } from 'vuex';
+    
     export default {
         methods: {
-            signOut(){
-                this.$store.dispatch('currentUser/logoutUser');
+            ...mapMutations('currentUser',[
+                'LOGOUT_USER',
+                'GET_USER'
+            ]),
+            logoutUser(){
+                this.LOGOUT_USER();
+                this.$router.push("/login");
+            },
+            getUser(){
+                this.GET_USER();
             }
         },
         computed: {
-            currentUser: {
-                get() {
-                    return this.$store.state.currentUser.user;
-                }
-            }
+            ...mapState('currentUser',[
+                'user'
+            ])
         },
         created(){
             if( localStorage.hasOwnProperty("workoutshop_token")){
                 axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("workoutshop_token");
-                this.$store.dispatch('currentUser/getUser');
+                this.getUser();
             }
         }
     }

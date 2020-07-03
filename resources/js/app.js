@@ -3,7 +3,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vuetify from "../plugins/vuetify";
-import store from "./store";
+import store from "./store/index";
 import router from './router';
 import common from './common';
 

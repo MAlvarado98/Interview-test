@@ -31,6 +31,6 @@ Route::any('/products/{slug}', function (){
     return view('spa');
 });
 
-Route::any('/product/{slug}', function (){
+Route::any('/products/{id}/{slug}', function (){
     return view('spa');
 });

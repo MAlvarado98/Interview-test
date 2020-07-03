@@ -5,24 +5,15 @@
 </template>
 
 <script>
-    export default {
+    import { mapState, mapMutations } from 'vuex';
+    export default {    
         beforeCreate(){
             if( localStorage.hasOwnProperty("workoutshop_token")){
-                this.$store.dispatch('currentUser/getUser');
-                if(this.$store.state.currentUser.role == 2){
-                    
-                }else{
-                    window.location.replace("/");
+                if(this.$store.state.currentUser.user.role != 2){
+                    this.$router.push("/");
                 }
             }else{
-                window.location.replace("/login");
-            }
-        },
-        computed: {
-            currentUser: {
-                get() {
-                    return this.$store.state.currentUser.user;
-                }
+                this.$router.push("/login");
             }
         }
     }
