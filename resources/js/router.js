@@ -4,15 +4,19 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 import products from './components/ProductsComponent';
-import cart from './components/CartComponent';
+import product from './components/productComponents/ProductComponent';
+
+import cart from './components/cartComponents/CartComponent';
+
 import login from './components/LoginComponent';
 import register from './components/RegisterComponent';
+
 import admin from './components/AdminComponent';
 import adminPanel from './components/AdminPanelComponent';
-import adminProducts from './components/AdminProductsComponent';
-import adminUsers from './components/AdminUsersComponent';
-import product from './components/ProductComponent';
-import editCurrentUser from './components/EditCurrentUserComponent';
+import adminProducts from './components/adminComponents/AdminProductsComponent';
+import adminUsers from './components/adminComponents/AdminUsersComponent';
+
+import editCurrentUser from './components/userComponents/EditCurrentUserComponent';
 
 const routes = [
     {

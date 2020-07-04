@@ -18,10 +18,10 @@ Vue.use(BootstrapVue);
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('bar-component', require('./components/BarComponent.vue').default);
-Vue.component('product-cu-component', require('./components/ProductCUComponent.vue').default);
-Vue.component('products-list-component', require('./components/ProductsListComponent.vue').default);
-Vue.component('users-list-component', require('./components/UsersListComponent.vue').default);
-Vue.component('user-cu-component', require('./components/UserCUComponent.vue').default);
+Vue.component('product-cu-component', require('./components/productComponents/ProductCUComponent.vue').default);
+Vue.component('products-list-component', require('./components/productComponents/ProductsListComponent.vue').default);
+Vue.component('users-list-component', require('./components/userComponents/UsersListComponent.vue').default);
+Vue.component('user-cu-component', require('./components/userComponents/UserCUComponent.vue').default);
 
 Vue.mixin(common);
 
