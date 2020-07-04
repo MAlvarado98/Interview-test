@@ -72,7 +72,6 @@
             ]),
             logoutUser(){
                 this.LOGOUT_USER();
-                this.$router.push("/login");
             },
             getUser(){
                 this.GET_USER();

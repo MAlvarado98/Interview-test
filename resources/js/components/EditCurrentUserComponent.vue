@@ -41,9 +41,6 @@
     import { mapState, mapMutations } from 'vuex';
 
     export default {
-        beforeDestroy(){
-            this.clearUser();
-        },
         computed: {
             ...mapState('currentUser',[
                 'user'

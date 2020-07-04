@@ -35,7 +35,7 @@ class AuthController extends Controller
         }catch(Throwable $e){
             return response()->json([
                 "message" => "Please send valid fields."
-            ]);
+            ],400);
         }
     }
 
@@ -81,7 +81,7 @@ class AuthController extends Controller
         }catch(Throwable $e){
             return response()->json([
                 "message" => "Please send valid fields."
-            ]);
+            ],400);
         }
     }
 }

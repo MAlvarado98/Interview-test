@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../../router';
 
 function populateUserEdit(usr){
     state.userEdit.id = usr.id;
@@ -56,16 +57,25 @@ const mutations = {
                     response.data.token
                 );
                 state.user = response.data.user;
+                router.push("/");
             }
         })
         .catch(error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Logout user and change user state
     LOGOUT_USER: (state) => {
         localStorage.removeItem("workoutshop_token");
         state.user = {};
+        router.push("/login");
     },
     //Register user and change user state
     REGISTER_USER: (state, user) => {
@@ -86,7 +96,14 @@ const mutations = {
             }
         })
         .catch(error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         });
     },
     //Gets all users OIUIA and current user role is administrator
@@ -133,11 +150,26 @@ const mutations = {
         })
         .then( response => {
             state.users.push(response.data.user);
-            clearProduct();
+            clearUserEdit();
             $('#addUserCollapse').toggleClass("show");
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Allows to update an user of any role OIUIA and current user role is administartor
@@ -157,9 +189,24 @@ const mutations = {
             state.users[index].role = user.role;
             clearUserEdit();
             $('#addUserCollapse').toggleClass("show");
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Allows to create an user if its role isn't administrator OIUIA and current user role is administartor
@@ -169,9 +216,24 @@ const mutations = {
             let index = state.users.findIndex( item => item.id == state.userEdit.id);
             state.users.splice(index, 1);
             clearUserEdit();
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Allows current user to update its credentials
@@ -187,9 +249,24 @@ const mutations = {
             clearUserEdit();
             localStorage.removeItem("workoutshop_token");
             window.location.href = '/login';
+            Vue.toasted.success(response.data.message+" Please login again.",{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Allows current user to delete its uesr
@@ -198,15 +275,30 @@ const mutations = {
         .then( response => {
             clearUserEdit();
             localStorage.removeItem("workoutshop_token");
-            window.location.href = '/login';
+            window.location.href = '/';
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message+" Please login again.",{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
     },
     //Change operation state
     CHANGE_OPERATION_STATE: (state, operation) =>{
-        state.operation = operation
+        state.operation = operation;
     },
     //Helper to populate with current user
     POPULATE_UPDATE_CURRENT_USER: (state) =>{

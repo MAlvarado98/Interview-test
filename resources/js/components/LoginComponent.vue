@@ -15,9 +15,6 @@
                         <input type="checkbox" value="remember-me"> Remember me
                         </label>
                     </div>
-                    <div v-if="message">
-                        Hola perras
-                    </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </form>
             </div>
@@ -47,7 +44,6 @@
             ]),
             login(){
                 this.LOGIN_USER(this.user);
-                this.$router.push("/");
             }
         },
         beforeCreate(){

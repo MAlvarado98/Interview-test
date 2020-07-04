@@ -6,6 +6,15 @@ import Vuetify from "../plugins/vuetify";
 import store from "./store/index";
 import router from './router';
 import common from './common';
+import vueCountryRegionSelect from 'vue-country-region-select';
+import { BootstrapVue } from 'bootstrap-vue';
+import Toasted from 'vue-toasted';
+ 
+Vue.use(Toasted,{
+    iconPack : 'material'
+});
+Vue.use(vueCountryRegionSelect);
+Vue.use(BootstrapVue);
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('bar-component', require('./components/BarComponent.vue').default);

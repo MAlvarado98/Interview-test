@@ -44,4 +44,5 @@ Route::prefix('/cart')-> group(function () {
     Route::middleware('auth:api')->put('/{id}','CartController@update');
     Route::middleware('auth:api')->delete('/{id}','CartController@destroy');
     Route::middleware('auth:api')->delete('/all','CartController@destroyAll');
+    Route::middleware('auth:api')->post('/checkout/submit','CartController@checkout');
 });

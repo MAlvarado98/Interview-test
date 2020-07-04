@@ -5,11 +5,11 @@
             <form @submit.prevent="">
                 <div class="form-group">
                     <label for="fullNameInput">Full name</label>
-                    <input v-model="userEdit.name" type="text" class="form-control" id="fullNameInput" placeholder="Full user name">
+                    <input v-model="userEdit.name" type="text" class="form-control" id="fullNameInput" placeholder="Full user name" required>
                 </div>
                 <div class="form-group">
                     <label for="emailInput">Email</label>
-                    <input v-model="userEdit.email" type="email" class="form-control" id="emailInput" placeholder="example@direction.com">
+                    <input v-model="userEdit.email" type="email" class="form-control" id="emailInput" placeholder="example@direction.com" required>
                 </div>
                 <div v-if="editingOwn!=1" class="form-group">
                     <label for="roleSelect">Role</label>
@@ -41,7 +41,8 @@
 
     export default {
         beforeDestroy(){
-            this.clearUser();
+            if(this.$route.path=="/editUser")
+                this.clearUser();
         },
         data: function () {
             return {

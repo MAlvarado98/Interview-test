@@ -132,7 +132,7 @@ class CartController extends Controller
                 if($newQuantity == 0){
                     if(Cart::find($cartProduct->id)->delete()){
                         return response() -> json([
-                            "message" => "Cart successfully deleted."
+                            "message" => "Product successfully deleted from cart."
                         ], 200);
                     }
                 }
@@ -192,6 +192,44 @@ class CartController extends Controller
         }else{
             return response() -> json([
                 "message" => "It seems you don't have this product in your cart."
+            ], 400);
+        }
+    }
+
+    public function checkout(Request $request){
+        $cart = $request->cart;
+        $information = $request->information;
+        if(count($cart)>0){
+            //Delete quantity of items from stock
+            DB::beginTransaction();
+            foreach($cart as $item){
+                $prod = DB::table('products')->where('id',$item['product_id'])->get()[0];
+                $quantity = $item['quantity'];
+                if($prod->stock >= $quantity){;
+                    $newStock = $prod->stock - $quantity;
+                    DB::table('products')->where('id', ($prod->id))->update(['stock' => $newStock]);
+                }else{
+                    DB::rollBack();
+                    return response() -> json([
+                        "message" => "It seems there aren't enough ".$item['name']."."
+                    ], 400);
+                }
+            }
+            foreach($cart as $item){
+                if(!DB::table('carts')->where('id',$item['id'])->delete()){
+                    DB::rollBack();
+                    return response() -> json([
+                        "message" => "Ups! Something went wrong"
+                    ], 400);
+                }
+            }
+            DB::commit();
+            return response() -> json([
+                "message" => "Payment successfully done!"
+            ], 200);
+        }else{
+            return response() -> json([
+                "message" => "You don't have any product in your cart"
             ], 400);
         }
     }

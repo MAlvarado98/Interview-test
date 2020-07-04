@@ -57,7 +57,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if($user->role==""){
+        if($user->role==2){
             try{
                 $register = $request->validate([
                     'name' => 'required|string',
@@ -93,7 +93,7 @@ class UserController extends Controller
             }catch(Throwable $e){
                 return response()->json([
                     "message" => "Please send valid fields."
-                ]);
+                ],400);
             }
         }else{
             return response() -> json([

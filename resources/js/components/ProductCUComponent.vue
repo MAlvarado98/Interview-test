@@ -5,11 +5,11 @@
             <form @submit.prevent="">
                 <div class="form-group">
                     <label for="productNameInput">Product Name</label>
-                    <input v-model="product.name" type="text" class="form-control" id="productNameInput" placeholder="Example Name - With some details">
+                    <input v-model="product.name" type="text" class="form-control" id="productNameInput" placeholder="Example Name - With some details" required>
                 </div>
                 <div class="form-group">
                     <label for="productType">Product Category</label>
-                    <select v-model="product.type" class="form-control" id="productType">
+                    <select v-model="product.type" class="form-control" id="productType" required>
                         <option value="men" selected>Men</option>
                         <option value="women" >Women</option>
                         <option value="suplements" >Suplements</option>
@@ -19,18 +19,18 @@
                 </div>
                 <div v-if="operation == 'edit'" class="form-group">
                     <label for="productType">Product Status</label>
-                    <select v-model="product.status" class="form-control" id="productType">
+                    <select v-model="product.status" class="form-control" id="productType" required>
                         <option value="1" selected>Available</option>
                         <option value="0" >Not available</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="quantityStockInput">Quantity in stock</label>
-                    <input v-model="product.stock" type="number" min="1" class="form-control" id="quantityStockInput" placeholder="0">
+                    <input v-model="product.stock" type="number" min="1" class="form-control" id="quantityStockInput" placeholder="0" required>
                 </div>
                 <div class="form-group">
                     <label for="descriptionTextArea">Aditional Description</label>
-                    <textarea v-model="product.description" class="form-control" id="descriptionTextArea" rows="3"></textarea>
+                    <textarea v-model="product.description" class="form-control" id="descriptionTextArea" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="productPriceInput">Product Price</label>
@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
                         </div>
-                        <input v-model="product.price" type="number" min="0" step="0.01" class="form-control" id="productPriceInput">
+                        <input v-model="product.price" type="number" min="0" step="0.01" class="form-control" id="productPriceInput" required>
                     </div>
                 </div>
                 <div class="form-group">

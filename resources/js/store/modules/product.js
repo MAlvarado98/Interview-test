@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../../router';
 
 function clearProduct(){
     state.product.id = "";
@@ -47,9 +48,24 @@ const mutations = {
             state.products.push(response.data.product);
             clearProduct();
             $('#addProductCollapse').toggleClass("show");
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Allows to update a product OIUIA
@@ -77,9 +93,24 @@ const mutations = {
             state.products[index].type = prod.type;
             clearProduct();
             $('#addProductCollapse').toggleClass("show");
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Deletes a product OIUIA
@@ -90,9 +121,24 @@ const mutations = {
             let index = state.products.findIndex( item => item.id == prod.id);
             state.products.splice(index, 1);
             clearProduct();
+            Vue.toasted.show(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     },
     //Gets all products
@@ -130,7 +176,7 @@ const mutations = {
             state.product.status = prod.status;
         })
         .catch( error => {
-            alert("error");
+            
         })
     },
     //Helper mutation to populate product variable for edition
@@ -185,10 +231,25 @@ const mutations = {
             quantity: state.quantity
         })
         .then( response => {
-            alert("added to cart")
+            Vue.toasted.success(response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            }).goAway(2000);
+            router.go(-1);
         })
         .catch( error => {
-            state.message = error.response.data.message;
+            Vue.toasted.error(error.response.data.message,{
+                action : {
+                    text : 'close',
+                    onClick : (e, toastObject) => {
+                        toastObject.goAway(0);
+                    }
+                }
+            });
         })
     }
 };
